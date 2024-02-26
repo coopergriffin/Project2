@@ -1,0 +1,76 @@
+<!--
+Authors: Cooper Griffin 
+Description: Main HTML page for Project 1 of Carleton Software Development Bootcamp
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FlickPick Game</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.3/css/bulma.min.css">
+    <link rel="stylesheet" href="assets/style.css">
+</head>
+<body>
+<section class="section">
+    <div class="container">
+
+        <!-- Title and Preamble at top of page -->
+        
+        <h1 class="title">FlickPick Game </h1>
+        <h2>Game to test your movie history knowledge</h2>
+        <p>Two Random Movies will be revealed to you. Choose the movie that is older and see how long of a streak you can get</p>
+        <p>High Score: <span id="highScore">0</span></p>
+        <p>Score: <span id="score">0</span></p>
+        <button id="startButton">Start</button>
+        <img>
+
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+      <div class="columns is-centered">
+        <!-- First Image and Button -->
+        <div class="column is-one-third">
+          <figure class="image is-4by3">
+            <img id = "firstImage" src="path/to/first-image.jpg" alt="First Image">
+          </figure>
+          <button id = "firstButton" class="button is-primary is-fullwidth">Button 1</button>
+        </div>
+
+        <!-- Second Image and Button -->
+        <div class="column is-one-third">
+          <figure class="image is-4by3">
+            <img id="secondImage" src="path/to/second-image.jpg" alt="Second Image">
+          </figure>
+          <button id = "secondButton" class="button is-primary is-fullwidth">Button 2</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!--HTML Code for Modals -->
+    <div class="modal" id="resultModal">
+        <!--On click method closes Modal if outside region is clicked-->
+    <div class="modal-background" onclick="closeModal()"></div>
+        <div class="modal-card">
+            <header class="modal-card-head">
+                <p class="modal-card-title" id="modalTitle"></p>
+                <button class="delete" aria-label="close" onclick="closeModal()"></button>
+            </header>
+            <section class="modal-card-body" id="modalBody"></section>
+        </div>
+    </div>
+
+    <script src="assets/script.js"></script>
+</body>
+
+<!-- Footer Message -->
+<footer>
+    Created by Cooper Griffin<br>
+    Movie Poster Images from The Movie Database,
+    Movie Data from The Open Movie DB<br>
+    
+</footer>
+</html>
