@@ -21,7 +21,7 @@ Question.init(
         category_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'genre',
+                model: 'category',
                 key: 'id',
             },
         },
