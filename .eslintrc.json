@@ -1,0 +1,25 @@
+{
+    "root": true,
+    "env": {
+        "browser": true,
+        "commonjs": true,
+        "node": true,
+        "es6": true,
+        "es2017": true
+    },
+    "rules": {
+        "brace-style": "error",
+        "no-undef-init": "error",
+        "no-empty": "warn",
+        "no-extra-semi": "warn",
+        "no-unreachable": "error",
+        "curly": ["error", "multi-line"],
+        "dot-notation": "error",
+        "no-multi-spaces": "warn",
+        "no-empty-function": "warn",
+        "no-unused-vars": "warn",
+        "indent": "error",
+        "quotes": ["error", "single"],
+        "semi": ["error", "always"]
+    }
+}
