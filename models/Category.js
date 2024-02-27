@@ -1,9 +1,9 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
 
-class Actor extends Model {};
+class Category extends Model {};
 
-Actor.init(
+Category.init(
     {
         id: {
             type: DataTypes.INTEGER,
@@ -11,24 +11,26 @@ Actor.init(
             primaryKey: true,
             autoIncrement: true,
         },
-        name: {
+        title: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
-        cast_ids: {
+        question_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'cast',
+                model: 'question',
                 key: 'id'
-            }
-        }
+            },
+        },
+        
     },
     {
         sequelize,
         freezeTableName: true,
         underscore: true,
-        modelName: 'actor',
+        modelName: 'category',
     }
 );
 
-module.exports = Actor;
+module.exports = Category;

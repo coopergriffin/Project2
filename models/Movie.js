@@ -19,10 +19,10 @@ Movie.init(
             type: DataTypes.DATE,
             allowNull: false,
         },
-        genre_id: {
+        category_id: {
             type: DataTypes.INTEGER,
             references: {
-                model: 'genre',
+                model: 'category',
                 key: 'id',
             },
         },

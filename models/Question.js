@@ -18,7 +18,7 @@ Question.init(
                 key: 'id',
             }
         },
-        genre_id: {
+        category_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'genre',
