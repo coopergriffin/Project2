@@ -25,13 +25,6 @@ Movie.init(
                 model: 'category',
                 key: 'id',
             },
-        },
-        cast_members: {
-            type: DataTypes.STRING,
-            references: {
-                model: 'cast',
-                key: 'id',
-            },
         }
     },
     {

@@ -17,14 +17,7 @@ Question.init(
                 model: 'movie',
                 key: 'id',
             }
-        },
-        category_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'category',
-                key: 'id',
-            },
-        },
+        }
     },
     {
         sequelize,

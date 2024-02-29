@@ -15,15 +15,7 @@ Category.init(
             type: DataTypes.STRING,
             allowNull: false,
             unique: true,
-        },
-        question_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'question',
-                key: 'id'
-            },
-        },
-        
+        }
     },
     {
         sequelize,
