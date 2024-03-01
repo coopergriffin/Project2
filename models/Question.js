@@ -11,6 +11,10 @@ Question.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         movie_id: {
             type: DataTypes.INTEGER,
             references: {

@@ -18,13 +18,5 @@ Question.belongsToMany(Movie, {
 Movie.belongsToMany(Actor, { through: Cast });
 Actor.belongsToMany(Movie, { through: Cast });
 
-// Movie.hasMany(Cast, {
-//     foreignKey: 'cast_members'
-// });
-
-// Actor.belongsToMany(Cast, {
-//     foreignKey: 'cast_ids'
-// });
-
 module.exports = { User, Category, Movie, Question, Cast, Actor };
 
