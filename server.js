@@ -1,6 +1,43 @@
 //Cooper Griffin 
-//Created Feb 26th 
+//Created Feb 26th
+//Entry point for application. 
 
+
+//Node module requires and dependencies 
+const express = require('express');
+const exphbs = require('express-handlebars').create({ defaultLayout: false });
+const path = require('path');
+
+const app = express();
+
+// Set the views directory
+app.set('views', path.join(__dirname, 'views'));
+
+// Handlebars middleware
+app.engine('handlebars', exphbs.engine);
+app.set('view engine', 'handlebars');
+
+// Body Parser Middleware
+app.use(express.urlencoded({ extended: false }));
+
+//Acceses static files in the public folder 
+app.use(express.static(path.join(__dirname, 'public')));
+
+// Routes
+app.get('/', (req, res) => {
+    res.render('login');
+});
+
+// Start server
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`Server listening on port http://localhost:${PORT}`);
+});
+
+
+
+
+/* Old server.js code 
 const express = require('express');
 const path = require('path'); // Path module for handling file paths
 
@@ -21,3 +58,5 @@ app.get('*', (req, res) => {
 app.listen(port, () => {
   console.log(`Server listening on port http://localhost:${port}`);
 });
+
+*/
