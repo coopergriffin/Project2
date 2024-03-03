@@ -2,8 +2,7 @@
 //Created Feb 26th
 //Entry point for application. 
 
-
-//Node module requires and dependencies 
+// Node module requires and dependencies
 const express = require('express');
 const exphbs = require('express-handlebars').create({ defaultLayout: false });
 const path = require('path');
@@ -20,20 +19,39 @@ app.set('view engine', 'handlebars');
 // Body Parser Middleware
 app.use(express.urlencoded({ extended: false }));
 
-//Acceses static files in the public folder 
+// Accesses static files in the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Routes
+// Route for the root URL
 app.get('/', (req, res) => {
-    res.render('login');
+	// Redirect to the login page
+	res.redirect('/login');
+});
+
+// Route for the login page
+app.get('/login', (req, res) => {
+	// Render login page
+	res.render('login');
+});
+
+// Handle login form submission
+app.post('/login', (req, res) => {
+	// Perform authentication (example: check username and password)
+	// Assuming authentication is successful, redirect to Flick Pick page
+	res.redirect('/flickpick');
+});
+
+// Route for the Flick Pick page
+app.get('/flickpick', (req, res) => {
+	// Render Flick Pick page
+	res.render('flickpick');
 });
 
 // Start server
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
-  console.log(`Server listening on port http://localhost:${PORT}`);
+	console.log(`Server listening on port http://localhost:${PORT}`);
 });
-
 
 
 
