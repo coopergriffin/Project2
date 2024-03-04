@@ -1,3 +1,8 @@
+//Cooper Griffin 
+//March 3rd 2024 
+//Handles entry and home routes for project
+
+
 const router = require('express').Router();
 //const { Category, Movie, Question, Cast } = require('../models'); //Imports models
 const withAuth = require('../utils/auth'); //Import authentication function
