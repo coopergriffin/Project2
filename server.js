@@ -49,6 +49,12 @@ app.use(express.json());
 // Import and use routes 
 app.use(routes);
 
+// Start server
+app.listen(PORT, () => {
+	console.log(`Server listening on port http://localhost:${PORT}`);
+});
+
+
 /*
 // Route for the root URL
 app.get('/', (req, res) => {
@@ -76,10 +82,6 @@ app.get('/flickpick', (req, res) => {
 });
 */
 
-// Start server
-app.listen(PORT, () => {
-	console.log(`Server listening on port http://localhost:${PORT}`);
-});
 
 
 
