@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const { all } = require('.');
 const { Category, Movie, Question, Cast } = require('../models'); //Imports models
 const withAuth = require('../utils/auth'); //Import authentication function
 
+//Homepage route to start game
 router.get('/', async (req, res) => {
   try {
     res.render('homepage', {
@@ -14,6 +14,7 @@ router.get('/', async (req, res) => {
   }
 });
 
+//Category selection page
 router.get('/play', withAuth, async (req, res) => {
   try {
     const categoryData = await Category.findall();
@@ -31,6 +32,7 @@ router.get('/play', withAuth, async (req, res) => {
   }
 });
 
+//Game page when Movie category is selected
 router.get('/play/movies', withAuth, async (req, res) => {
   try {
     const dbMovieData = await Movie.findAll({
@@ -57,4 +59,14 @@ router.get('/play/movies', withAuth, async (req, res) => {
     res.status(500).json(err);
   }
 });
+
+router.get('/login', (req, res) => { //login page route
+  if (res.session.loggedIn) {
+    res.redirect('/');
+    return;
+  }
+  res.render('login');
+});
+
+module.exports = router;
 
