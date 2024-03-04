@@ -11,12 +11,13 @@ Movie.belongsTo(Category, {
 
 Movie.hasMany(Question);
 
-Question.belongsToMany(Movie, {
-    foreignKey: 'movie_id'
-});
+// Define the many-to-many association between Movie and Question
+Movie.belongsToMany(Question, { through: 'MovieQuestion' });
+Question.belongsToMany(Movie, { through: 'MovieQuestion' });
 
 Movie.belongsToMany(Actor, { through: Cast });
 Actor.belongsToMany(Movie, { through: Cast });
 
 module.exports = { User, Category, Movie, Question, Cast, Actor };
+
 

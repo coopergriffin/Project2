@@ -1,7 +1,8 @@
 const { Model, DataTypes } = require('sequelize');
 const sequelize = require('../config/connection');
+const Movie = require('./Movie');
 
-class Question extends Model {};
+class Question extends Model {}
 
 Question.init(
     {
@@ -30,5 +31,8 @@ Question.init(
         modelName: 'question',
     }
 );
+
+// Define the many-to-many association with the Movie model
+Question.belongsToMany(Movie, { through: 'MovieQuestion' });
 
 module.exports = Question;
