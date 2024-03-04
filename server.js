@@ -1,8 +1,9 @@
-//Cooper Griffin / Ryan Walker
-//Created Feb 26th / Editted Mar 3rd
-//Entry point for application. / Updated to access db and routes
+//Cooper Griffin 
+//Created Feb 26th
+//Entry point for application. 
 
-// Node module requires and dependencies
+
+//Node module requires and dependencies 
 const express = require('express');
 const exphbs = require('express-handlebars').create({ defaultLayout: false });
 const session = require('express-session');
@@ -43,48 +44,20 @@ app.set('view engine', 'handlebars');
 // Body Parser Middleware
 app.use(express.urlencoded({ extended: false }));
 
-// Accesses static files in the public folder
+//Acceses static files in the public folder 
 app.use(express.static(path.join(__dirname, 'public')));
 
-// RW - Routes for home and api
-app.use(routes);
+// Routes
+app.get('/', (req, res) => {
+    res.render('login');
+});
 
 // Start server
 const PORT = process.env.PORT || 5000;
-sequelize.sync({ force: false }).then(() => {
-	app.listen(PORT, () => {
-		console.log(`Server listening on port http://localhost:${PORT}`);
-	});
+app.listen(PORT, () => {
+  console.log(`Server listening on port http://localhost:${PORT}`);
 });
 
-
-
-/* RW - removing old routes
-// Route for the root URL
-app.get('/', (req, res) => {
-	// Redirect to the login page
-	res.redirect('/login');
-});
-
-// Route for the login page
-app.get('/login', (req, res) => {
-	// Render login page
-	res.render('login');
-});
-
-// Handle login form submission
-app.post('/login', (req, res) => {
-	// Perform authentication (example: check username and password)
-	// Assuming authentication is successful, redirect to Flick Pick page
-	res.redirect('/flickpick');
-});
-
-// Route for the Flick Pick page
-app.get('/flickpick', (req, res) => {
-	// Render Flick Pick page
-	res.render('flickpick');
-});
-*/
 
 
 
