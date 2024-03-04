@@ -1,3 +1,7 @@
+//Cooper Griffin
+//March 3rd 2024
+//File that connects project to database. Checks for Heroku JAWSDB if not uses Local DB
+
 const Sequelize = require('sequelize');
 require('dotenv').config({ path: '.env.EXAMPLE' }); // Load environment variables from .env.EXAMPLE file
 
