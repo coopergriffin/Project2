@@ -14,13 +14,6 @@ Actor.init(
         name: {
             type: DataTypes.STRING,
             allowNull: false,
-        },
-        cast_ids: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'cast',
-                key: 'id'
-            }
         }
     },
     {

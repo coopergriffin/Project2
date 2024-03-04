@@ -7,7 +7,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
     "seed": "node /seeds/index.js",
-    "lint": "npx eslint **/*.js"
+    "lint": "npx eslint **/*.js",
+    "lintfix": "npx eslint --fix **/*.js"
   },
   "author": "coopergriffin, RyanWalker2, sivanishanthar",
   "license": "ISC",
