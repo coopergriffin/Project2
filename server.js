@@ -50,8 +50,9 @@ app.use(express.json());
 app.use(routes);
 
 // Start server
-app.listen(PORT, () => {
-	console.log(`Server listening on port http://localhost:${PORT}`);
+
+sequelize.sync({ force: false }).then(() => {
+    app.listen(PORT, () => console.log(`Server listening on port http://localhost:${PORT}`));
 });
 
 
