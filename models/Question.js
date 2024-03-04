@@ -11,20 +11,17 @@ Question.init(
             primaryKey: true,
             autoIncrement: true,
         },
+        content: {
+            type: DataTypes.STRING,
+            allowNull: false,
+        },
         movie_id: {
             type: DataTypes.INTEGER,
             references: {
                 model: 'movie',
                 key: 'id',
             }
-        },
-        category_id: {
-            type: DataTypes.INTEGER,
-            references: {
-                model: 'category',
-                key: 'id',
-            },
-        },
+        }
     },
     {
         sequelize,
