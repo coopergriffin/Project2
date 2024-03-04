@@ -1,7 +1,33 @@
 const router = require('express').Router();
-const { Category, Movie, Question, Cast } = require('../models'); //Imports models
+//const { Category, Movie, Question, Cast } = require('../models'); //Imports models
 const withAuth = require('../utils/auth'); //Import authentication function
 
+router.get('/', (req, res) => {
+	// Redirect to the login page
+	res.redirect('/login');
+});
+
+// Route for the login page
+router.get('/login', (req, res) => {
+	// Render login page
+	res.render('login', { layout: false });
+});
+
+router.get('/flickpick', (req, res) => {
+	// Render Flick Pick page
+	res.render('flickpick', { layout: false });
+});
+
+// Handle login form submission
+router.post('/login', (req, res) => {
+	// Perform authentication (example: check username and password)
+	// Assuming authentication is successful, redirect to Flick Pick page
+	res.redirect('/flickpick');
+});
+
+module.exports = router;
+
+/*
 //Homepage route to start game
 router.get('/', async (req, res) => {
   try {
@@ -60,13 +86,7 @@ router.get('/play/movies', withAuth, async (req, res) => {
   }
 });
 
-router.get('/login', (req, res) => { //login page route
-  if (res.session.loggedIn) {
-    res.redirect('/');
-    return;
-  }
-  res.render('login');
-});
 
 module.exports = router;
 
+*/

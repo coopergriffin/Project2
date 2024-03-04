@@ -1,12 +1,5 @@
 const Sequelize = require('sequelize');
-const dotenv = require('dotenv');
-const fs = require('fs');
-
-// Load environment variables from .env.example file
-dotenv.config({ path: '.env.example' });
-
-// Print loaded environment variables for debugging
-console.log('Loaded environment variables:', process.env);
+require('dotenv').config(); // Load environment variables from .env file
 
 let sequelize;
 
@@ -26,3 +19,4 @@ if (process.env.JAWSDB_URL) {
 }
 
 module.exports = sequelize;
+

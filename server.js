@@ -4,24 +4,52 @@
 
 // Node module requires and dependencies
 const express = require('express');
-const exphbs = require('express-handlebars').create({ defaultLayout: false });
+const exphbs = require('express-handlebars');
 const path = require('path');
+const session = require('express-session');
+//const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+const helpers = require('./utils/helpers');
 
 const app = express();
+const PORT = process.env.PORT || 5000;
+
+/*
+const sess = {
+	secret: 'Super secret secret',
+	cookie: {},
+	resave: false,
+	saveUninitialized: true,
+	store: new SequelizeStore({
+	  db: sequelize,
+	}),
+};
+
+
+app.use(session(sess));
+*/
+
+// Set handlebars as the template engine
+const hbs = exphbs.create({ helpers });
+app.engine('handlebars', hbs.engine);
+app.set('view engine', 'handlebars');
 
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
 
-// Handlebars middleware
-app.engine('handlebars', exphbs.engine);
-app.set('view engine', 'handlebars');
-
-// Body Parser Middleware
-app.use(express.urlencoded({ extended: false }));
-
-// Accesses static files in the public folder
+// Middleware for serving static files
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Body parser middleware
+app.use(express.urlencoded({ extended: false }));
+app.use(express.json());
+
+// Import and use routes 
+app.use(routes);
+
+/*
 // Route for the root URL
 app.get('/', (req, res) => {
 	// Redirect to the login page
@@ -46,9 +74,9 @@ app.get('/flickpick', (req, res) => {
 	// Render Flick Pick page
 	res.render('flickpick');
 });
+*/
 
 // Start server
-const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
 	console.log(`Server listening on port http://localhost:${PORT}`);
 });
