@@ -1,13 +1,37 @@
-//Cooper Griffin 
-//Created Feb 26th
-//Entry point for application. 
+//Cooper Griffin / Ryan Walker
+//Created Feb 26th / Editted Mar 3rd
+//Entry point for application. / Updated to access db and routes
 
 // Node module requires and dependencies
 const express = require('express');
 const exphbs = require('express-handlebars').create({ defaultLayout: false });
+const session = require('express-session');
+// Initialize Sequelize with session store
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
 const path = require('path');
 
+const routes = require('./controllers');
+const sequelize = require('./config/connection');
+
 const app = express();
+
+// Set up session and connect to Sequelize db
+const sess = {
+	secret: 'movie trivia',
+	cookie: {
+		maxAge: 60 * 60 * 1000, //Session will expire after 1 hour (defined as 1000ms)
+		httpOnly: true, //will only store cookies in server connected to HTTP
+		secure: false, //Set to false to always initialize cookies.
+		sameSite: 'strict',
+	},
+	resave: false,
+	saveUninitialized: true,
+	store: new SequelizeStore({
+		db: sequelize,
+	}),
+};
+
+app.use(session(sess));
 
 // Set the views directory
 app.set('views', path.join(__dirname, 'views'));
@@ -22,6 +46,20 @@ app.use(express.urlencoded({ extended: false }));
 // Accesses static files in the public folder
 app.use(express.static(path.join(__dirname, 'public')));
 
+// RW - Routes for home and api
+app.use(routes);
+
+// Start server
+const PORT = process.env.PORT || 5000;
+sequelize.sync({ force: false }).then(() => {
+	app.listen(PORT, () => {
+		console.log(`Server listening on port http://localhost:${PORT}`);
+	});
+});
+
+
+
+/* RW - removing old routes
 // Route for the root URL
 app.get('/', (req, res) => {
 	// Redirect to the login page
@@ -46,12 +84,7 @@ app.get('/flickpick', (req, res) => {
 	// Render Flick Pick page
 	res.render('flickpick');
 });
-
-// Start server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-	console.log(`Server listening on port http://localhost:${PORT}`);
-});
+*/
 
 
 
