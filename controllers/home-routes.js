@@ -7,7 +7,7 @@ const router = require('express').Router();
 //const { Category, Movie, Question, Cast } = require('../models'); //Imports models
 const withAuth = require('../utils/auth'); //Import authentication function
 
-router.get('/', (req, res) => {
+router.get('/', async (req, res) => {
 	// Redirect to the login page
 	res.redirect('/login');
 });
