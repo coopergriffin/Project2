@@ -1,6 +1,6 @@
 const sequelize = require("../config/connection");
 
-const seedMovie = require("./MovieData");
+const seedMovie = require("./movieData");
 const seedActor = require("./actorData");
 const seedCast = require("./castData");
 const seedQuestion = require("./questionData");
