@@ -2,25 +2,25 @@ const { Actor } = require("../models");
 
 const actorData = [
   {
-    name: "Brad1",
+    name: "Brad Pitt",
   },
   {
-    name: "Tom1",
+    name: "Mark Hamill",
   },
   {
-    name: "name1",
+    name: "Tim Robbins",
   },
   {
-    name: "name2",
+    name: "Marlon Brando",
   },
   {
-    name: "name3",
+    name: "Heath Ledger",
   },
   {
-    name: "name4",
+    name: "Lee J. Cobb",
   },
   {
-    name: "name5",
+    name: "Samuel L. Jackson",
   },
 ];
 

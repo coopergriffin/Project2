@@ -8,32 +8,32 @@ const castData = [
   },
   {
     role_name: "Andy Dufresne",
-    actor_id: 1,
+    actor_id: 2,
     movie_id: 2,
   },
   {
     role_name: "Vito Andolini Corleone",
-    actor_id: 1,
+    actor_id: 4,
     movie_id: 3,
   },
   {
     role_name: "James Gordon",
-    actor_id: 1,
+    actor_id: 3,
     movie_id: 4,
   },
   {
     role_name: "Davis",
-    actor_id: 1,
+    actor_id: 6,
     movie_id: 5,
   },
   {
     role_name: "Vincent Vega",
-    actor_id: 1,
+    actor_id: 7,
     movie_id: 6,
   },
   {
     role_name: "Edward Norton",
-    actor_id: 1,
+    actor_id: 5,
     movie_id: 7,
   },
 ];
