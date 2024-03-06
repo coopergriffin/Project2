@@ -1,0 +1,191 @@
+:root {
+  --primary: #3d5852;
+  --secondary: #86938f;
+  --tertiary: #5e877f;
+  --quatrinary: #6c6b67;
+  --light: #e3e4e3;
+  --dark: #182c23;
+  --error: rgb(228, 46, 1);
+  --border-radius: 0.3rem;
+}
+
+body {
+  font-family: Arial;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  justify-content: flex-start;
+  background-color: var(--quatrinary);
+}
+
+a {
+  color: var(--dark);
+  text-decoration: none;
+}
+
+a:visited {
+  color: inherit;
+}
+
+header {
+  padding: 40px;
+  text-align: center;
+  background: var(--primary);
+  color: var(--light);
+}
+
+main {
+  display: block;
+  flex-wrap: wrap;
+  flex-grow: 1;
+}
+
+aside {
+  flex: 0;
+  background-color: var(--tertiary);
+  padding: 80px;
+  text-align: left;
+  color: var(--light);
+}
+
+nav {
+  display: flex;
+  background-color: var(--secondary);
+}
+
+nav a {
+  color: var(--light);
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+}
+
+nav a:hover {
+  color: var(--secondary);
+  background-color: var(--dark);
+}
+
+.btn-no-style {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: none;
+  font-size: 100%;
+  transition: color 0.1s;
+  margin-left: 16px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* CARDS */
+.card {
+  margin: 20px;
+  flex: 0 1 300px;
+  border: 7px double var(--dark);
+  border-radius: 10px;
+  background-color: var(--light);
+  color: var(--dark);
+}
+
+.login-card {
+  margin: 0 0 20px 0;
+  flex: 0 0 50%;
+  max-width: 50%;
+  padding: 5px;
+  border: 3px solid var(--dark);
+  border-radius: var(--border-radius);
+  border-style: double;
+  border-width: thick;
+  background-color: #577a7c;
+  color: var(--light);
+}
+
+.card header {
+  color: var(--light);
+  font-weight: bold;
+  text-transform: uppercase;
+  margin: 0;
+  background-color: var(--tertiary);
+  padding: 0.625rem;
+  border-radius: calc(0.18rem - 1px) calc(0.18rem - 1px) 0 0;
+}
+
+.card-body {
+  font-size: 1.4rem;
+  text-align: center;
+  font-weight: bold;
+}
+
+/* LAYOUT */
+.container {
+  display: flex;
+  flex-flow: column wrap;
+  align-content: flex-start;
+  align-items: center;
+}
+
+/* Additions for Movie Trivia Game layout */
+.movie-trivia {
+  display: flex;
+  justify-content: flex-start; /* Aligns the movies to the left */
+  gap: 20px; /* Keeps the space between the movies */
+  flex-wrap: wrap; /* Allows movies to wrap to the next line if there's not enough space */
+}
+
+.movie {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start; /* Aligns items to the left */
+}
+
+.movie img {
+  max-width: 100%; /* Adjust based on your preference, ensures image is responsive */
+  margin-bottom: 10px; /* Adds some space between the image and the button */
+}
+
+.trivia-intro {
+  text-align: center; /* Center-align the text */
+}
+
+.trivia-intro h2,
+.trivia-intro p {
+  margin: 10px auto; /* Add some vertical spacing and center horizontally */
+}
+
+.movie-select-btn {
+  /* Additional styling for the button if needed */
+}
+
+#start-game-btn {
+
+  font-size: 16px; /* Adjust font size as needed */
+
+  padding: 10px 20px; /* Adjust padding to control the size */
+
+  /* Add any other styling properties as needed */
+
+}
+
+.gallery {
+  flex: 4;
+  background-color: #fff;
+  padding: 50px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  align-items: center;
+}
+
+.movie-poster {
+  max-width: 200px; /* Adjust the maximum width as needed */
+  max-height: 300px; /* Adjust the maximum height as needed */
+  width: auto; /* Ensures the width is auto-adjusted to maintain aspect ratio */
+  height: auto; /* Ensures the height is auto-adjusted to maintain aspect ratio */
+  display: block; /* Ensures the image is block-level for proper spacing */
+  margin: 0 auto; /* Centers the image within its container */
+}

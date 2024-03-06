@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { User } = require('../../models');
+const withAuth = require('../../utils/auth');
 
 // CREATE new user
 router.post('/', async (req, res) => {
@@ -10,11 +11,14 @@ router.post('/', async (req, res) => {
       password: req.body.password,
     });
 
-    // Set up sessions with a 'loggedIn' variable set to `true`
     req.session.save(() => {
-      req.session.loggedIn = true;
 
-      res.status(200).json(dbUserData);
+      req.session.loggedIn = true;
+    
+      req.session.userId = dbUserData.id; // Ensure this line is present
+    
+      res.status(200).json({ user: dbUserData, message: 'You are now logged in!' });
+    
     });
   } catch (err) {
     console.log(err);
@@ -47,9 +51,9 @@ router.post('/login', async (req, res) => {
       return;
     }
 
-    // Once the user successfully logs in, set up the sessions variable 'loggedIn'
     req.session.save(() => {
       req.session.loggedIn = true;
+      req.session.userId = dbUserData.id;
 
       res
         .status(200)
@@ -61,9 +65,87 @@ router.post('/login', async (req, res) => {
   }
 });
 
+// GET high score for logged-in user
+/*router.get('/highscore', async (req, res) => {
+  if (!req.session.loggedIn) {
+    res.status(403).json({ message: 'User not logged in' });
+    return;
+  }
+
+  try {
+    const userData = await User.findByPk(req.session.userId, {
+      attributes: ['highScore'],
+    });
+
+    if (!userData) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    res.status(200).json(userData);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+*/
+
+// Add this route to controllers/api/user-routes.js
+router.get('/highscore', withAuth, async (req, res) => {
+  try {
+    // Assuming the user's ID is stored in the session upon login
+    const userData = await User.findByPk(req.session.userId, {
+      attributes: ['highScore'], // Fetch only the highScore
+    });
+
+    if (!userData) {
+      res.status(404).json({ message: 'User not found' });
+      return;
+    }
+
+    res.json({ highScore: userData.highScore });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json(err);
+  }
+});
+
+// In user-routes.js
+
+// Route to handle score submission
+
+
+router.post('/submit', withAuth, async (req, res) => {
+  // Your existing logic remains here
+  console.log("!!!!");
+  try {
+    const userId = req.session.userId;
+    const { currentScore } = req.body;
+
+    // Fetch the user by ID
+    const user = await User.findByPk(userId);
+
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    // Update the user's highscore if the currentScore is higher than the existing highscore
+    if (currentScore > user.highScore) {
+      user.highScore = currentScore;
+      await user.save();
+    }
+
+    // Respond with the updated highscore
+    res.json({ highScore: user.highScore });
+  } catch (err) {
+    console.error('Error updating high score:', err);
+    res.status(500).json({ message: 'An error occurred while updating the high score', error: err.message });
+  }
+});
+
+
 // Logout
 router.post('/logout', (req, res) => {
-  // When the user logs out, destroy the session
   if (req.session.loggedIn) {
     req.session.destroy(() => {
       res.status(204).end();

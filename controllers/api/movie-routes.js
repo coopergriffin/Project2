@@ -1,76 +1,84 @@
+// controllers/api/movie-routes.js
 const router = require('express').Router();
-const { Movie } = require('../../models');
+const { Movie, User } = require('../../models');
+const sequelize = require('../../config/connection');
 
-//Get a specific Movie
-router.get('/:id', async (req, res) => {
+// Route to get two random movies
+router.get('/random', async (req, res) => {
   try {
-    const movieData = Movie.findByPk(req.params.id);
-    if (!movieData) {
-      res.status(404).json({ message: 'No Movie found in the database with that id.' });
-      return;
-    }
-    res.status(200).json(movieData);
+    const movies = await Movie.findAll({
+      order: sequelize.random(),
+      limit: 2,
+    });
+    res.json(movies);
   } catch (err) {
     res.status(500).json(err);
   }
 });
 
-// Create a new Movie
-router.post('/', async (req, res) => {
-  //req.body should look like this:
-  //  {
-  //    title: '',
-  //    year: '',
-  //    category_id: '',  
-  //  },
-  try {
-    const dbMovieData = Movie.create({
-      title: req.body.title,
-      year: req.body.year,
-      category_id: req.body.category_id,
-    });
-    res.status(200).json(dbMovieData);
-  } catch (err) {
-    res.status(400).json(err);
+// Submit user's choice and update score
+router.post('/submit', async (req, res) => {
+  const { selectedMovieId, firstMovieYear, secondMovieYear } = req.body;
+  if (!selectedMovieId || !firstMovieYear || !secondMovieYear) {
+    return res.status(400).json({ message: 'Missing required fields' });
   }
-});
 
-// Update a movie
-router.put('/:id', async (req, res) => {
+  if (typeof req.session.userId === 'undefined' || typeof req.session.score === 'undefined') {
+    return res.status(403).json({ message: 'Unauthorized or session expired' });
+  }
+
   try {
-    const dbMovieData = Movie.update(req.body, {
-      where: {
-        id: req.params.id,
-      },
-    });
-    if (!dbMovieData[0]) {
-      res.status(404).json({ message: 'No Movie found in the database with this id.' });
-      return;
+    const selectedMovie = await Movie.findByPk(selectedMovieId);
+    if (!selectedMovie) {
+      return res.status(404).json({ message: 'Movie not found' });
     }
-    res.status(200).json(dbMovieData);
+
+    if (selectedMovie.releaseYear === Math.min(firstMovieYear, secondMovieYear)) {
+      req.session.score = (req.session.score || 0) + 1;
+      
+      const user = await User.findByPk(req.session.userId);
+      if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+      }
+
+      if (req.session.score > user.highScore) {
+        user.highScore = req.session.score;
+        await user.save();
+      }
+      res.json({ correct: true, score: req.session.score, highScore: user.highScore });
+    } else {
+      const lastScore = req.session.score;
+      req.session.score = 0;
+      res.json({ correct: false, score: lastScore, highScore: user.highScore });
+    }
   } catch (err) {
-    res.status(500).json(err);
+    console.error('Error submitting movie choice:', err);
+    res.status(500).json({ message: 'An error occurred while processing your request', error: err.message });
   }
 });
 
-//Delete a movie
-router.delete('/:id', async (req, res) => {
+// Route to get the high score of the logged-in user
+/*
+router.get('/users/highscore', async (req, res) => {
+  if (!req.session.userId) {
+    return res.status(403).json({ message: 'Not logged in' });
+  }
+
   try {
-    const movieData = Movie.destroy({
-      where: {
-        id: req.params.id,
-      },
+    const user = await User.findByPk(req.session.userId, {
+      attributes: ['highScore'],
     });
 
-    if (!movieData) {
-      res.status(404).json({ message: 'No Movie found in the database with this id.' });
-      return;
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
     }
-    res.status(200).json({ message: 'Movie deleted from the database.' });
+
+    res.json({ highScore: user.highScore });
   } catch (err) {
-    res.status(500).json(err);
+    console.error('Error fetching user high score:', err);
+    res.status(500).json({ message: 'An error occurred while fetching the high score', error: err.message });
   }
 });
+*/
 
 module.exports = router;
-

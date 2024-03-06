@@ -1,0 +1,27 @@
+<main>
+
+  <h2>Movie Trivia Game</h2>
+  
+  <button id="start-game-btn">Start Game</button>
+  <p>{{gameInfo.description}}</p>
+
+  <!-- Add Score and Highscore Display -->
+  <div class="score-container">
+    <p>Score: <span id="current-score">{{gameInfo.score}}</span></p>
+    <p>Highscore: <span id="high-score">{{gameInfo.highscore}}</span></p>
+  </div>
+
+  
+
+  <div class="movie-trivia">
+    {{#each gameInfo.movies as |movie|}}
+    <div class="movie">
+      <img src="{{movie.imageURL}}" alt="Movie Poster for {{movie.title}}" class="movie-poster">
+      <button class="movie-select-btn" data-movie-id="{{movie.id}}">{{movie.name}}</button>
+    </div>
+    {{/each}}
+  </div>
+
+</main>
+
+<script src="/js/trivia.js"></script>

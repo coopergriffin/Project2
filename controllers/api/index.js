@@ -1,13 +1,12 @@
 const router = require('express').Router();
 
 const userRoutes = require('./user-routes');
-const movieRoutes = require('./movie-routes');
-const questionRoutes = require('./question-routes');
-const castRoutes = require('./cast-routes');
+const movieRoutes = require('./movie-routes'); // Import the movie routes
 
+// Use the user routes
 router.use('/users', userRoutes);
-router.use('/movie', movieRoutes);
-router.use('/question', questionRoutes);
-router.use('/cast', castRoutes);
+
+// Use the movie routes
+router.use('/movies', movieRoutes); // Add this line to use movie routes
 
 module.exports = router;

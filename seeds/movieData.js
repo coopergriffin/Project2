@@ -1,47 +1,68 @@
-const { Cast } = require('../models');
+const { Movie } = require('../models');
 
 const movieData = [
     {
-        title: 'Star Wars',
-        year: '1977-05-25',
-        genre_id: 1,
-        cast_members: [],
+        id: 1,
+        title: "The Shawshank Redemption",
+        releaseYear: 1994,
+        imageURL: "/img/the_shawshank_redemption.jpg",
     },
     {
-        title: 'The shawshank Redemption',
-        year: '1994-05-20',
-        genre_id: 1,
-        cast_members: [],
+        id: 2,
+        title: "The Godfather",
+        releaseYear: 1972,
+        imageURL: "/img/the_godfather.jpg",
     },
     {
-        title: 'The Godfather',
-        year: '1972-06-01',
-        genre_id: 1,
-        cast_members: [],
+        id: 3,
+        title: "The Dark Knight",
+        releaseYear: 2008,
+        imageURL: "/img/the_dark_knight.jpg",
     },
     {
-        title: 'The Dark Knight',
-        year: '2008-06-15',
-        genre_id: 1,
-        cast_members: [],
+        id: 4,
+        title: "The Godfather Part II",
+        releaseYear: 1974,
+        imageURL: "/img/the_godfather_part_ii.jpg",
     },
     {
-        title: '12 Angry Men',
-        year: '1957-02-01',
-        genre_id: 1,
-        cast_members: [],
+        id: 5,
+        title: "12 Angry Men",
+        releaseYear: 1957,
+        imageURL: "/img/12_angry_men.jpg",
     },
     {
-        title: 'Pulp Fiction',
-        year: '1994-05-18',
-        genre_id: 1,
-        cast_members: [],
+        id: 6,
+        title: "Schindler's List",
+        releaseYear: 1993,
+        imageURL: "/img/schindlers_list.jpg",
     },
     {
-        title: 'Fight Club',
-        year: '1999-06-01',
-        genre_id: 1,
-        cast_members: [],
+        id: 7,
+        title: "The Lord of the Rings: The Return of the King",
+        releaseYear: 2003,
+        imageURL: "/img/the_lord_of_the_rings_the_return_of_the_king.jpg",
     },
+    {
+        id: 8,
+        title: "Pulp Fiction",
+        releaseYear: 1994,
+        imageURL: "/img/pulp_fiction.jpg",
+    },
+    {
+        id: 9,
+        title: "The Good, the Bad and the Ugly",
+        releaseYear: 1966,
+        imageURL: "/img/the_good_the_bad_and_the_ugly.jpg",
+    },
+    {
+        id: 10,
+        title: "The Lord of the Rings: The Fellowship of the Ring",
+        releaseYear: 2001,
+        imageURL: "/img/the_lord_of_the_rings_the_fellowship_of_the_ring.jpg",
+    },
+];
 
-]
+const seedMovies = () => Movie.bulkCreate(movieData);
+
+module.exports = seedMovies;
