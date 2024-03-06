@@ -12,28 +12,28 @@ You don't need to install anything. You can open this in any browser on your com
 
 Navigate to the link on your browser, and create an account. Once you have an account you can start playing. 
 
-The following images depict the appearance and functionality of the web application:
+The following images depict the appearance and functionality of the [web application](https://flickpickproject-67fa6c76aec5.herokuapp.com/) .
 
 
 
-![Start Page](images/startScreen.png)
-![Qestion Start](images/questionStart.png)
-![Correct Answer](images/correctAnswer.png)
-![All Done](images/alldone.png)
-![High Score](images/Highmark.png)
+![Start Page](public/screenShoots/homepage.png)
+![Log in](public/screenShoots/afterLogin.png)
+![Start game](public/screenShoots/startGame.png)
+![High score](public/screenShoots/highScore.png)
+![Log back in](public/screenShoots/logoutLogbackin.png)
 
 
 
 
 # Link to deployed application
 
-JavaScript Fundamentals Quiz: https://sivanishanthar.github.io/JavaScript-Fundamentals-Quiz/
+FLICK PICK: https://flickpickproject-67fa6c76aec5.herokuapp.com/
 
 # Credit
 
-[Cooper](https://github.com/coopergriffin)
-[Ryan](https://github.com/Ryanwalker2)
-[Siva](https://github.com/sivanishanthar)
+[Cooper](https://github.com/coopergriffin) \
+[Ryan](https://github.com/Ryanwalker2) \
+[Siva](https://github.com/sivanishanthar) 
 
 # License
 
